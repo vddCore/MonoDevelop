@@ -1,10 +1,7 @@
-**MonoDevelop** is a full-featured integrated development environment (IDE) for mono using Gtk#.
+**MonoDevelop** ~~is~~ was a full-featured integrated development environment (IDE) for mono using Gtk#. This README is not accurate anymore.
+Ignore this README. DO NOT READ THIS README. I could just delete this, y'know... 
 
-See http://www.monodevelop.com for more info.  
-
-[![Build Status](http://jenkins.mono-project.com/job/test-monodevelop-mainline/badge/icon)](http://jenkins.mono-project.com/job/test-monodevelop-mainline/)
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mono/monodevelop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Don't see http://www.monodevelop.com for more info. It makes no sense in context of this repository.  
 
 Directory organization
 ----------------------
@@ -19,13 +16,14 @@ There are two main directories:
 Compiling
 ---------
 
-If you are building from Git, make sure that you initialize the submodules
+~~If you are building from Git, make sure that you initialize the submodules
 that are part of this repository by executing:
-`git submodule update --init --recursive`
+`git submodule update --init --recursive`~~
+Hahaha what? No more submodules. It's stupid but simplifies the job a lot.
 
 If you are running a parallel mono installation, make sure to run all the following steps
 while having sourced your mono installation script. (source path/to/my-environment-script)
-See: http://www.mono-project.com/Parallel_Mono_Environments
+Do not see: http://www.mono-project.com/Parallel_Mono_Environments
 
 To compile execute:
 `./configure ; make`
@@ -42,11 +40,8 @@ There are two variables you can set when running `configure`:
   * `stable`: builds the MonoDevelop core and some stable extra add-ins.
   * `core`: builds the MonoDevelop core only.
   * `all`: builds everything
-  * `mac`: builds for Mac OS X
   * You can also create your own profile by adding a file to the profiles
 directory containing a list of the directories to build.
-
-Disclaimer: Please be aware that the 'extras/JavaBinding' and 'extras/ValaBinding' packages do not currently work. When prompted or by manually selecting them during the './configure --select' step, make sure they stay deselected. (deselected by default)
 
 Running
 -------
@@ -64,24 +59,6 @@ Bear in mind that if you are installing under a custom prefix, you may need to m
 
 *(It's possible that you need to install for your locale to be
 correctly set.)*
-
-Packaging for OS X
------------------
-
-To package MonoDevelop for OS X in a convenient MonoDevelop.app
-file, just do this after MonoDevelop has finished building (with
-`make`): `cd main/build/MacOSX ; make`.
-You can run MonoDevelop: `open MonoDevelop.app` or build dmg package: `./make-dmg-bundle.sh`
-
-Dependencies
-------------
-
-	Mono >= 3.0.4
-	Gtk# >= 2.12.8
-	monodoc >= 1.0
-	mono-addins >= 0.6
-	cmake (Linux only for git support)
-	libssh2 (Linux only for git support)
 
 Special Environment Variables
 -----------------------------
@@ -102,42 +79,4 @@ Make sure to 'make uninstall' or otherwise remove the gtk-sharp3 version and ins
 
 xbuild may still cache a reference to assemblies that you may have accidentally installed into your mono installation,
 like the gtk-sharp3 as described before. You can delete the cache in $HOME/.config/xbuild/pkgconfig-cache-2.xml
-
-
-
-References
-----------
-
-**MonoDevelop website**
-
-http://www.monodevelop.com
-
-**Gnome Human Interface Guidelines (HIG)**
-
-https://developer.gnome.org/hig/stable/
-
-**freedesktop.org standards**
-
-http://freedesktop.org/Standards/
-
-**Integrating with GNOME** *(a little out of date)*
-
-http://developers.sun.com/solaris/articles/integrating_gnome.html
-
-**Bugzilla**
-
-http://bugzilla.mozilla.org/bugwritinghelp.html
-
-http://bugzilla.mozilla.org/page.cgi?id=etiquette.html
-
-Discussion, Bugs, Patches
--------------------------
-
-monodevelop-list@lists.ximian.com *(questions and discussion)*
-
-monodevelop-patches-list@lists.ximian.com *(track commits to MonoDevelop)*
-
-monodevelop-bugs@lists.ximian.com *(track MonoDevelop bugzilla component)*
-
-http://bugzilla.xamarin.com *(submit bugs and patches here)*
 
