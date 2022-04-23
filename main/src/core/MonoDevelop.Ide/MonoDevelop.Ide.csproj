@@ -1,0 +1,3395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{27096E7F-C91C-4AC6-B289-6897A701DF21}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MonoDevelop.Ide</AssemblyName>
+    <RootNamespace>MonoDevelop.Ide</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>..\..\..\build\bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <DefineConstants>DEBUG</DefineConstants>
+    <NoWarn>1591;1573</NoWarn>
+    <DocumentationFile>..\..\..\build\bin\MonoDevelop.Ide.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>..\..\..\build\bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <DebugSymbols>true</DebugSymbols>
+    <NoWarn>1591;1573</NoWarn>
+    <DocumentationFile>..\..\..\build\AddIns\MonoDevelop.Ide.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugMac|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\build\bin</OutputPath>
+    <DefineConstants>DEBUG,MAC</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <DocumentationFile>..\..\..\build\bin\MonoDevelop.Ide.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+    <NoWarn>1591;1573</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseMac|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\build\bin</OutputPath>
+    <DefineConstants>MAC</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\..\build\AddIns\MonoDevelop.Ide.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Execution>
+      <Execution clr-version="Net_2_0" />
+    </Execution>
+    <NoWarn>1591;1573</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="monodoc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="ICSharpCode.SharpZipLib" />
+    <Reference Include="Mono.Cairo" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Xamarin.Mac" Condition=" '$(Configuration)' == 'DebugMac' Or '$(Configuration)' == 'ReleaseMac' ">
+      <HintPath>..\..\..\external\Xamarin.Mac.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoDevelop.Core\MonoDevelop.Core.csproj">
+      <Project>{7525BB88-6142-4A26-93B9-A30C6983390A}</Project>
+      <Name>MonoDevelop.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Texteditor\Mono.TextEditor.csproj">
+      <Project>{A2329308-3751-4DBD-9A75-5F7B8B024625}</Project>
+      <Name>Mono.TextEditor</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoDevelop.Projects.Formats.MSBuild\MonoDevelop.Projects.Formats.MSBuild.csproj">
+      <Project>{A437F1A3-78DF-4F00-8053-D32A8B1EB679}</Project>
+      <Name>MonoDevelop.Projects.Formats.MSBuild</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\nrefactory\ICSharpCode.NRefactory\ICSharpCode.NRefactory.csproj">
+      <Project>{3B2A5653-EC97-4001-BB9B-D90F1AF2C371}</Project>
+      <Name>ICSharpCode.NRefactory</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\nrefactory\ICSharpCode.NRefactory.CSharp\ICSharpCode.NRefactory.CSharp.csproj">
+      <Project>{53DCA265-3C3C-42F9-B647-F72BA678122B}</Project>
+      <Name>ICSharpCode.NRefactory.CSharp</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\xwt\Xwt\Xwt.csproj">
+      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
+      <Name>Xwt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\xwt\Xwt.Gtk\Xwt.Gtk.csproj">
+      <Project>{C3887A93-B2BD-4097-8E2F-3A063EFF32FD}</Project>
+      <Name>Xwt.Gtk</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins\Mono.Addins.csproj">
+      <Project>{91DD5A2D-9FE3-4C3C-9253-876141874DAD}</Project>
+      <Name>Mono.Addins</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.Setup\Mono.Addins.Setup.csproj">
+      <Project>{A85C9721-C054-4BD8-A1F3-0227615F0A36}</Project>
+      <Name>Mono.Addins.Setup</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\mono-addins\Mono.Addins.Gui\Mono.Addins.Gui.csproj">
+      <Project>{FEC19BDA-4904-4005-8C09-68E82E8BEF6A}</Project>
+      <Name>Mono.Addins.Gui</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\cecil\Mono.Cecil.csproj">
+      <Project>{D68133BD-1E63-496E-9EDE-4FBDBF77B486}</Project>
+      <Name>Mono.Cecil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\debugger-libs\Mono.Debugging\Mono.Debugging.csproj">
+      <Project>{90C99ADB-7D4B-4EB4-98C2-40BD1B14C7D2}</Project>
+      <Name>Mono.Debugging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\nrefactory\ICSharpCode.NRefactory.IKVM\ICSharpCode.NRefactory.IKVM.csproj">
+      <Project>{A727169F-D94F-443F-B305-B057D7F3B420}</Project>
+      <Name>ICSharpCode.NRefactory.IKVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\external\ikvm\reflect\IKVM.Reflection.csproj">
+      <Project>{4CB170EF-DFE6-4A56-9E1B-A85449E827A7}</Project>
+      <Name>IKVM.Reflection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="templates\AppConfigFile.xft.xml">
+      <LogicalName>AppConfigFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\BlankCombine.xpt.xml">
+      <LogicalName>BlankCombine.xpt.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyClass.xft.xml">
+      <LogicalName>EmptyClass.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyEnum.xft.xml">
+      <LogicalName>EmptyEnum.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyHTMLFile.xft.xml">
+      <LogicalName>EmptyHTMLFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyInterface.xft.xml">
+      <LogicalName>EmptyInterface.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyResourceFile.xft.xml">
+      <LogicalName>EmptyResourceFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyStruct.xft.xml">
+      <LogicalName>EmptyStruct.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyTextFile.xft.xml">
+      <LogicalName>EmptyTextFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\EmptyXMLFile.xft.xml">
+      <LogicalName>EmptyXMLFile.xft.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\assembly-reference-overlay-16.png">
+      <LogicalName>assembly-reference-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\assembly-reference-overlay-16%402x.png">
+      <LogicalName>assembly-reference-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\invalid-reference-overlay-16.png">
+      <LogicalName>invalid-reference-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\invalid-reference-overlay-16%402x.png">
+      <LogicalName>invalid-reference-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-reference-overlay-16.png">
+      <LogicalName>project-reference-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-reference-overlay-16%402x.png">
+      <LogicalName>project-reference-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\GenericProject.xpt.xml">
+      <LogicalName>GenericProject.xpt.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pin-down-16.png">
+      <LogicalName>pin-down-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pin-down-16%402x.png">
+      <LogicalName>pin-down-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pin-up-16.png">
+      <LogicalName>pin-up-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pin-up-16%402x.png">
+      <LogicalName>pin-up-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="options\KeyBindingSchemeEmacs.xml">
+      <LogicalName>KeyBindingSchemeEmacs.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="options\KeyBindingSchemeVisualStudio.xml">
+      <LogicalName>KeyBindingSchemeVisualStudio.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\Workspace.xpt.xml">
+      <LogicalName>Workspace.xpt.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="options\KeyBindingSchemeMonoDevelop1.xml">
+      <LogicalName>KeyBindingSchemeMonoDevelop1.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\navigate-next-16.png">
+      <LogicalName>navigate-next-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\navigate-previous-16.png">
+      <LogicalName>navigate-previous-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="options\KeyBindingSchemeMonoDevelop2.xml">
+      <LogicalName>KeyBindingSchemeMonoDevelop2.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\MITX11LicencePolicy.xml">
+      <LogicalName>MITX11LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\Apache2LicencePolicy.xml">
+      <LogicalName>Apache2LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\GPL2LicencePolicy.xml">
+      <LogicalName>GPL2LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\GPL3LicencePolicy.xml">
+      <LogicalName>GPL3LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\LGPL2-1LicencePolicy.xml">
+      <LogicalName>LGPL2-1LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\NewBSDLicencePolicy.xml">
+      <LogicalName>NewBSDLicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.CodeTemplates\MonoDevelop-templates.xml">
+      <LogicalName>MonoDevelop-templates.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\MonoTextStylePolicy.xml">
+      <LogicalName>MonoTextStylePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\VisualStudioTextStylePolicy.xml">
+      <LogicalName>VisualStudioTextStylePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.StandardHeader\LGPL3LicencePolicy.xml">
+      <LogicalName>LGPL3LicencePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.CodeFormatting\InvariantTextStylePolicy.xml">
+      <LogicalName>InvariantTextStylePolicy.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\add-namespace-16.png">
+      <LogicalName>add-namespace-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\assembly-project-16.png">
+      <LogicalName>assembly-project-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\assembly-project-16%402x.png">
+      <LogicalName>assembly-project-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-16.png">
+      <LogicalName>breakpoint-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-16%402x.png">
+      <LogicalName>breakpoint-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-disable-all-16.png">
+      <LogicalName>breakpoint-disable-all-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-disable-all-16%402x.png">
+      <LogicalName>breakpoint-disable-all-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-disabled-16.png">
+      <LogicalName>breakpoint-disabled-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-disabled-16%402x.png">
+      <LogicalName>breakpoint-disabled-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-invalid-16.png">
+      <LogicalName>breakpoint-invalid-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-invalid-16%402x.png">
+      <LogicalName>breakpoint-invalid-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-new-16.png">
+      <LogicalName>breakpoint-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-new-16%402x.png">
+      <LogicalName>breakpoint-new-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-on-off-16.png">
+      <LogicalName>breakpoint-on-off-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breakpoint-on-off-16%402x.png">
+      <LogicalName>breakpoint-on-off-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\build-project-16.png">
+      <LogicalName>build-project-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\build-solution-16.png">
+      <LogicalName>build-solution-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-template-16.png">
+      <LogicalName>element-template-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-template-16%402x.png">
+      <LogicalName>element-template-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-template-surroundwith-16.png">
+      <LogicalName>element-template-surroundwith-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-template-surroundwith-16%402x.png">
+      <LogicalName>element-template-surroundwith-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\comment-16.png">
+      <LogicalName>comment-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\comment-16%402x.png">
+      <LogicalName>comment-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\edit-find-next-16.png">
+      <LogicalName>edit-find-next-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\edit-select-all-16.png">
+      <LogicalName>edit-select-all-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-class-16.png">
+      <LogicalName>element-class-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-class-16%402x.png">
+      <LogicalName>element-class-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-delegate-16.png">
+      <LogicalName>element-delegate-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-delegate-16%402x.png">
+      <LogicalName>element-delegate-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-enumeration-16.png">
+      <LogicalName>element-enumeration-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-enumeration-16%402x.png">
+      <LogicalName>element-enumeration-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-event-16.png">
+      <LogicalName>element-event-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-event-16%402x.png">
+      <LogicalName>element-event-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-extensionmethod-16.png">
+      <LogicalName>element-extensionmethod-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-extensionmethod-16%402x.png">
+      <LogicalName>element-extensionmethod-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-field-16.png">
+      <LogicalName>element-field-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-field-16%402x.png">
+      <LogicalName>element-field-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-interface-16.png">
+      <LogicalName>element-interface-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-interface-16%402x.png">
+      <LogicalName>element-interface-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-constant-16.png">
+      <LogicalName>element-constant-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-constant-16%402x.png">
+      <LogicalName>element-constant-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-method-16.png">
+      <LogicalName>element-method-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-method-16%402x.png">
+      <LogicalName>element-method-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-method-new-16.png">
+      <LogicalName>element-method-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-method-new-16%402x.png">
+      <LogicalName>element-method-new-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-namespace-16.png">
+      <LogicalName>element-namespace-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-namespace-16%402x.png">
+      <LogicalName>element-namespace-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-property-16.png">
+      <LogicalName>element-property-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-property-16%402x.png">
+      <LogicalName>element-property-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-structure-16.png">
+      <LogicalName>element-structure-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-structure-16%402x.png">
+      <LogicalName>element-structure-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-class-32.png">
+      <LogicalName>file-class-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-class-32%402x.png">
+      <LogicalName>file-class-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-enumeration-32.png">
+      <LogicalName>file-enumeration-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-enumeration-32%402x.png">
+      <LogicalName>file-enumeration-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-interface-32.png">
+      <LogicalName>file-interface-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-interface-32%402x.png">
+      <LogicalName>file-interface-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-struct-32.png">
+      <LogicalName>file-struct-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-struct-32%402x.png">
+      <LogicalName>file-struct-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-xml-16.png">
+      <LogicalName>file-xml-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-xml-16%402x.png">
+      <LogicalName>file-xml-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-xml-32.png">
+      <LogicalName>file-xml-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-xml-32%402x.png">
+      <LogicalName>file-xml-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-script-16.png">
+      <LogicalName>file-script-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-script-16%402x.png">
+      <LogicalName>file-script-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-script-32.png">
+      <LogicalName>file-script-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-script-32%402x.png">
+      <LogicalName>file-script-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-new-16.png">
+      <LogicalName>folder-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-keyword-16.png">
+      <LogicalName>element-keyword-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-keyword-16%402x.png">
+      <LogicalName>element-keyword-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\monodevelop-16.png">
+      <LogicalName>monodevelop-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\monodevelop-22.png">
+      <LogicalName>monodevelop-22.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\monodevelop-32.png">
+      <LogicalName>monodevelop-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\monodevelop-48.png">
+      <LogicalName>monodevelop-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-16.png">
+      <LogicalName>package-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-16%402x.png">
+      <LogicalName>package-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-24.png">
+      <LogicalName>package-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-24%402x.png">
+      <LogicalName>package-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-32.png">
+      <LogicalName>package-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-32%402x.png">
+      <LogicalName>package-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-48.png">
+      <LogicalName>package-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-48%402x.png">
+      <LogicalName>package-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-task-list-16.png">
+      <LogicalName>pad-task-list-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-task-list-16%402x.png">
+      <LogicalName>pad-task-list-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-16.png">
+      <LogicalName>project-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-16%402x.png">
+      <LogicalName>project-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-32.png">
+      <LogicalName>project-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-32%402x.png">
+      <LogicalName>project-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-console-overlay-32.png">
+      <LogicalName>project-console-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-console-overlay-32%402x.png">
+      <LogicalName>project-console-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-gui-overlay-32.png">
+      <LogicalName>project-gui-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-gui-overlay-32%402x.png">
+      <LogicalName>project-gui-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-library-overlay-32.png">
+      <LogicalName>project-library-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-library-overlay-32%402x.png">
+      <LogicalName>project-library-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-shared-assets-overlay-32.png">
+      <LogicalName>project-shared-assets-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-shared-assets-overlay-32%402x.png">
+      <LogicalName>project-shared-assets-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-package-overlay-32.png">
+      <LogicalName>project-package-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-package-overlay-32%402x.png">
+      <LogicalName>project-package-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-new-16.png">
+      <LogicalName>project-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-source-16.png">
+      <LogicalName>package-source-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\package-source-16%402x.png">
+      <LogicalName>package-source-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\reference-16.png">
+      <LogicalName>reference-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\reference-16%402x.png">
+      <LogicalName>reference-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-16.png">
+      <LogicalName>solution-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-16%402x.png">
+      <LogicalName>solution-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-32.png">
+      <LogicalName>solution-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-32%402x.png">
+      <LogicalName>solution-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-64.png">
+      <LogicalName>solution-64.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-64%402x.png">
+      <LogicalName>solution-64@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-128.png">
+      <LogicalName>solution-128.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-128%402x.png">
+      <LogicalName>solution-128@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-folder-new-16.png">
+      <LogicalName>solution-folder-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\solution-new-16.png">
+      <LogicalName>solution-new-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-overlay-16.png">
+      <LogicalName>element-visibility-internal-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-overlay-16%402x.png">
+      <LogicalName>element-visibility-internal-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-private-overlay-16.png">
+      <LogicalName>element-visibility-private-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-private-overlay-16%402x.png">
+      <LogicalName>element-visibility-private-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-protected-overlay-16.png">
+      <LogicalName>element-visibility-protected-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-protected-overlay-16%402x.png">
+      <LogicalName>element-visibility-protected-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-an-protected-overlay-16.png">
+      <LogicalName>element-visibility-internal-an-protected-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-an-protected-overlay-16%402x.png">
+      <LogicalName>element-visibility-internal-an-protected-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-or-protected-overlay-16.png">
+      <LogicalName>element-visibility-internal-or-protected-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-internal-or-protected-overlay-16%402x.png">
+      <LogicalName>element-visibility-internal-or-protected-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-static-overlay-16.png">
+      <LogicalName>element-visibility-static-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-visibility-static-overlay-16%402x.png">
+      <LogicalName>element-visibility-static-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-web-overlay-32.png">
+      <LogicalName>project-web-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-web-overlay-32%402x.png">
+      <LogicalName>project-web-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\workspace-16.png">
+      <LogicalName>workspace-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\workspace-16%402x.png">
+      <LogicalName>workspace-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\workspace-32.png">
+      <LogicalName>workspace-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\workspace-32%402x.png">
+      <LogicalName>workspace-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-minimize-9.png">
+      <LogicalName>pad-minimize-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-minimize-9%402x.png">
+      <LogicalName>pad-minimize-9@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-close-9.png">
+      <LogicalName>pad-close-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-close-9%402x.png">
+      <LogicalName>pad-close-9@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-dock-9.png">
+      <LogicalName>pad-dock-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Docking\icons\pad-dock-9%402x.png">
+      <LogicalName>pad-dock-9@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectPadContextMenu.addin.xml">
+      <LogicalName>ProjectPadContextMenu.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\Commands.addin.xml">
+      <LogicalName>Commands.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\DefaultPolicyPanels.addin.xml">
+      <LogicalName>DefaultPolicyPanels.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\GlobalOptionsDialog.addin.xml">
+      <LogicalName>GlobalOptionsDialog.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\ItemOptionPanels.addin.xml">
+      <LogicalName>ItemOptionPanels.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\MainMenu.addin.xml">
+      <LogicalName>MainMenu.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\MainToolbar.addin.xml">
+      <LogicalName>MainToolbar.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\MimeTypes.addin.xml">
+      <LogicalName>MimeTypes.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\Pads.addin.xml">
+      <LogicalName>Pads.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\StockIcons.addin.xml">
+      <LogicalName>StockIcons.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\Templates.addin.xml">
+      <LogicalName>Templates.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\MonoDevelop.Ide.addin.xml">
+      <LogicalName>MonoDevelop.Ide.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtensionModel\Policies.addin.xml">
+      <LogicalName>Policies.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.Commands\CommandsExtensionModel.addin.xml">
+      <LogicalName>CommandsExtensionModel.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassPadContextMenu.addin.xml">
+      <LogicalName>ClassPadContextMenu.addin.xml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\feedback-16.png">
+      <LogicalName>feedback-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\feedback-16%402x.png">
+      <LogicalName>feedback-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\updates-16.png">
+      <LogicalName>updates-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\updates-16%402x.png">
+      <LogicalName>updates-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="branding\WelcomePage_Logo.png">
+      <LogicalName>WelcomePage_Logo.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="branding\WelcomePage_TopBorderRepeat.png">
+      <LogicalName>WelcomePage_TopBorderRepeat.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="branding\AboutImage.png">
+      <LogicalName>AboutImage.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\popup-close-16.png">
+      <LogicalName>popup-close-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\popup-close-16%402x.png">
+      <LogicalName>popup-close-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\popup-close-hover-16.png">
+      <LogicalName>popup-close-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\popup-close-hover-16%402x.png">
+      <LogicalName>popup-close-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-left-cap-normal.png">
+      <LogicalName>btn-debug-base-left-cap-normal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-left-cap-normal%402x.png">
+      <LogicalName>btn-debug-base-left-cap-normal@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-left-cap-pressed.png">
+      <LogicalName>btn-debug-base-left-cap-pressed.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-left-cap-pressed%402x.png">
+      <LogicalName>btn-debug-base-left-cap-pressed@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-middle-cap-normal.png">
+      <LogicalName>btn-debug-base-middle-cap-normal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-middle-cap-normal%402x.png">
+      <LogicalName>btn-debug-base-middle-cap-normal@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-middle-cap-pressed.png">
+      <LogicalName>btn-debug-base-middle-cap-pressed.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-middle-cap-pressed%402x.png">
+      <LogicalName>btn-debug-base-middle-cap-pressed@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-right-cap-normal.png">
+      <LogicalName>btn-debug-base-right-cap-normal.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-right-cap-normal%402x.png">
+      <LogicalName>btn-debug-base-right-cap-normal@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-right-cap-pressed.png">
+      <LogicalName>btn-debug-base-right-cap-pressed.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-debug-base-right-cap-pressed%402x.png">
+      <LogicalName>btn-debug-base-right-cap-pressed@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-disabled-32.png">
+      <LogicalName>btn-execute-disabled-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-disabled-32%402x.png">
+      <LogicalName>btn-execute-disabled-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-hover-32.png">
+      <LogicalName>btn-execute-hover-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-hover-32%402x.png">
+      <LogicalName>btn-execute-hover-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-normal-32.png">
+      <LogicalName>btn-execute-normal-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-normal-32%402x.png">
+      <LogicalName>btn-execute-normal-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-pressed-32.png">
+      <LogicalName>btn-execute-pressed-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\assets\btn-execute-pressed-32%402x.png">
+      <LogicalName>btn-execute-pressed-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-execute-disabled-32.png">
+      <LogicalName>ico-execute-disabled-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-execute-disabled-32%402x.png">
+      <LogicalName>ico-execute-disabled-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-execute-normal-32.png">
+      <LogicalName>ico-execute-normal-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-execute-normal-32%402x.png">
+      <LogicalName>ico-execute-normal-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-stop-disabled-32.png">
+      <LogicalName>ico-stop-disabled-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-stop-disabled-32%402x.png">
+      <LogicalName>ico-stop-disabled-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-stop-normal-32.png">
+      <LogicalName>ico-stop-normal-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-stop-normal-32%402x.png">
+      <LogicalName>ico-stop-normal-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\disclose-arrow-down-16.png">
+      <LogicalName>disclose-arrow-down-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\disclose-arrow-down-16%402x.png">
+      <LogicalName>disclose-arrow-down-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\disclose-arrow-up-16.png">
+      <LogicalName>disclose-arrow-up-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\disclose-arrow-up-16%402x.png">
+      <LogicalName>disclose-arrow-up-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-search-results-16.png">
+      <LogicalName>pad-search-results-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-search-results-16%402x.png">
+      <LogicalName>pad-search-results-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\searchbox-clear-16.png">
+      <LogicalName>searchbox-clear-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\searchbox-clear-16%402x.png">
+      <LogicalName>searchbox-clear-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\searchbox-search-16.png">
+      <LogicalName>searchbox-search-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\searchbox-search-16%402x.png">
+      <LogicalName>searchbox-search-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button.png">
+      <LogicalName>tree-popup-button.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button%402x.png">
+      <LogicalName>tree-popup-button@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button-hover.png">
+      <LogicalName>tree-popup-button-hover.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button-hover%402x.png">
+      <LogicalName>tree-popup-button-hover@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button-down.png">
+      <LogicalName>tree-popup-button-down.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tree-popup-button-down%402x.png">
+      <LogicalName>tree-popup-button-down@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\clear-all-bookmarks-16.png">
+      <LogicalName>clear-all-bookmarks-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\close-all-documents-16.png">
+      <LogicalName>close-all-documents-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\close-solution-16.png">
+      <LogicalName>close-solution-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\empty-16.png">
+      <LogicalName>empty-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\find-in-files-16.png">
+      <LogicalName>find-in-files-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\goto-next-bookmark-16.png">
+      <LogicalName>goto-next-bookmark-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\goto-prev-bookmark-16.png">
+      <LogicalName>goto-prev-bookmark-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-application-output-16.png">
+      <LogicalName>pad-application-output-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-application-output-16%402x.png">
+      <LogicalName>pad-application-output-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-immediate-16.png">
+      <LogicalName>pad-immediate-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-immediate-16%402x.png">
+      <LogicalName>pad-immediate-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-generic-pad-16.png">
+      <LogicalName>pad-generic-pad-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-generic-pad-16%402x.png">
+      <LogicalName>pad-generic-pad-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\replace-in-files-16.png">
+      <LogicalName>replace-in-files-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-resource-16.png">
+      <LogicalName>file-resource-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-resource-16%402x.png">
+      <LogicalName>file-resource-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-resource-32.png">
+      <LogicalName>file-resource-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-resource-32%402x.png">
+      <LogicalName>file-resource-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-text-32.png">
+      <LogicalName>file-text-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-text-32%402x.png">
+      <LogicalName>file-text-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-text-16.png">
+      <LogicalName>file-text-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-text-16%402x.png">
+      <LogicalName>file-text-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\toggle-bookmark-16.png">
+      <LogicalName>toggle-bookmark-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\web-search-16.png">
+      <LogicalName>web-search-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-generic-16.png">
+      <LogicalName>file-generic-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-generic-16%402x.png">
+      <LogicalName>file-generic-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-generic-32.png">
+      <LogicalName>file-generic-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-generic-32%402x.png">
+      <LogicalName>file-generic-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tabbar-prev-12.png">
+      <LogicalName>tabbar-prev-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tabbar-prev-12%402x.png">
+      <LogicalName>tabbar-prev-12@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tabbar-next-12.png">
+      <LogicalName>tabbar-next-12.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\tabbar-next-12%402x.png">
+      <LogicalName>tabbar-next-12@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breadcrumb-previous-normal-16.png">
+      <LogicalName>breadcrumb-previous-normal-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breadcrumb-previous-normal-16%402x.png">
+      <LogicalName>breadcrumb-previous-normal-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breadcrumb-next-normal-16.png">
+      <LogicalName>breadcrumb-next-normal-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\breadcrumb-next-normal-16%402x.png">
+      <LogicalName>breadcrumb-next-normal-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-16.png">
+      <LogicalName>information-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-16%402x.png">
+      <LogicalName>information-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-24.png">
+      <LogicalName>information-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-24%402x.png">
+      <LogicalName>information-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-32.png">
+      <LogicalName>information-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-32%402x.png">
+      <LogicalName>information-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-48.png">
+      <LogicalName>information-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\information-48%402x.png">
+      <LogicalName>information-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-16.png">
+      <LogicalName>question-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-16%402x.png">
+      <LogicalName>question-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-24.png">
+      <LogicalName>question-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-24%402x.png">
+      <LogicalName>question-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-32.png">
+      <LogicalName>question-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-32%402x.png">
+      <LogicalName>question-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-48.png">
+      <LogicalName>question-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\question-48%402x.png">
+      <LogicalName>question-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\command-16.png">
+      <LogicalName>command-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\command-16%402x.png">
+      <LogicalName>command-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-build-disabled-32.png">
+      <LogicalName>ico-build-disabled-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-build-disabled-32%402x.png">
+      <LogicalName>ico-build-disabled-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-build-normal-32.png">
+      <LogicalName>ico-build-normal-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Components.MainToolbar\icons\ico-build-normal-32%402x.png">
+      <LogicalName>ico-build-normal-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\stop-16.png">
+      <LogicalName>stop-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\stop-16%402x.png">
+      <LogicalName>stop-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\clear-16.png">
+      <LogicalName>clear-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\clear-16%402x.png">
+      <LogicalName>clear-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\link-chat.png">
+      <LogicalName>link-chat.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\link-cloud.png">
+      <LogicalName>link-cloud.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\link-heart.png">
+      <LogicalName>link-heart.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\link-info.png">
+      <LogicalName>link-info.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\new_solution.png">
+      <LogicalName>new_solution.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\open_solution.png">
+      <LogicalName>open_solution.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\link-overlay-16.png">
+      <LogicalName>link-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\link-overlay-16%402x.png">
+      <LogicalName>link-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-16.png">
+      <LogicalName>pad-error-list-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-16%402x.png">
+      <LogicalName>pad-error-list-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-errors-16.png">
+      <LogicalName>pad-error-list-errors-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-errors-16%402x.png">
+      <LogicalName>pad-error-list-errors-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-warnings-16.png">
+      <LogicalName>pad-error-list-warnings-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-error-list-warnings-16%402x.png">
+      <LogicalName>pad-error-list-warnings-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonoDevelop.Ide.WelcomePage\icons\starburst.png">
+      <LogicalName>starburst.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-variable-16.png">
+      <LogicalName>element-variable-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-variable-16%402x.png">
+      <LogicalName>element-variable-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-exception-16.png">
+      <LogicalName>element-exception-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-exception-16%402x.png">
+      <LogicalName>element-exception-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-fs-field-16.png">
+      <LogicalName>element-fs-field-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-fs-field-16%402x.png">
+      <LogicalName>element-fs-field-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-module-16.png">
+      <LogicalName>element-module-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-module-16%402x.png">
+      <LogicalName>element-module-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-other-declaration-16.png">
+      <LogicalName>element-other-declaration-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-other-declaration-16%402x.png">
+      <LogicalName>element-other-declaration-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-type-16.png">
+      <LogicalName>element-type-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\element-type-16%402x.png">
+      <LogicalName>element-type-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-source-16.png">
+      <LogicalName>file-source-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-source-16%402x.png">
+      <LogicalName>file-source-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-source-32.png">
+      <LogicalName>file-source-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-source-32%402x.png">
+      <LogicalName>file-source-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-header-16.png">
+      <LogicalName>file-header-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-header-16%402x.png">
+      <LogicalName>file-header-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-header-32.png">
+      <LogicalName>file-header-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-header-32%402x.png">
+      <LogicalName>file-header-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-unit-test-32.png">
+      <LogicalName>file-unit-test-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-unit-test-32%402x.png">
+      <LogicalName>file-unit-test-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-web-16.png">
+      <LogicalName>file-web-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-web-16%402x.png">
+      <LogicalName>file-web-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-web-32.png">
+      <LogicalName>file-web-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-web-32%402x.png">
+      <LogicalName>file-web-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-gtk-32.png">
+      <LogicalName>file-gtk-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\file-gtk-32%402x.png">
+      <LogicalName>file-gtk-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-component-mac-16.png">
+      <LogicalName>folder-component-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-component-mac-16%402x.png">
+      <LogicalName>folder-component-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-component-win-16.png">
+      <LogicalName>folder-component-win-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-component-win-16%402x.png">
+      <LogicalName>folder-component-win-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-generic-mac-16.png">
+      <LogicalName>folder-generic-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-generic-mac-16%402x.png">
+      <LogicalName>folder-generic-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-generic-win-16.png">
+      <LogicalName>folder-generic-win-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-generic-win-16%402x.png">
+      <LogicalName>folder-generic-win-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-special-mac-16.png">
+      <LogicalName>folder-special-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-special-mac-16%402x.png">
+      <LogicalName>folder-special-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-special-win-16.png">
+      <LogicalName>folder-special-win-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-special-win-16%402x.png">
+      <LogicalName>folder-special-win-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-web-reference-mac-16.png">
+      <LogicalName>folder-web-reference-mac-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-web-reference-mac-16%402x.png">
+      <LogicalName>folder-web-reference-mac-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-web-reference-win-16.png">
+      <LogicalName>folder-web-reference-win-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\folder-web-reference-win-16%402x.png">
+      <LogicalName>folder-web-reference-win-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-help-16.png">
+      <LogicalName>pad-help-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\pad-help-16%402x.png">
+      <LogicalName>pad-help-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preferences-16.png">
+      <LogicalName>preferences-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preferences-16%402x.png">
+      <LogicalName>preferences-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\sort-alphabetically-16.png">
+      <LogicalName>sort-alphabetically-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\sort-alphabetically-16%402x.png">
+      <LogicalName>sort-alphabetically-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\group-by-category-16.png">
+      <LogicalName>group-by-category-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\group-by-category-16%402x.png">
+      <LogicalName>group-by-category-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\add-16.png">
+      <LogicalName>add-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\add-16%402x.png">
+      <LogicalName>add-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-overlay-9.png">
+      <LogicalName>warning-overlay-9.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-overlay-9%402x.png">
+      <LogicalName>warning-overlay-9@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-8.png">
+      <LogicalName>warning-8.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-8%402x.png">
+      <LogicalName>warning-8@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-16.png">
+      <LogicalName>warning-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-16%402x.png">
+      <LogicalName>warning-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-24.png">
+      <LogicalName>warning-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-24%402x.png">
+      <LogicalName>warning-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-32.png">
+      <LogicalName>warning-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-32%402x.png">
+      <LogicalName>warning-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-48.png">
+      <LogicalName>warning-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\warning-48%402x.png">
+      <LogicalName>warning-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-16.png">
+      <LogicalName>error-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-16%402x.png">
+      <LogicalName>error-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-24.png">
+      <LogicalName>error-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-24%402x.png">
+      <LogicalName>error-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-32.png">
+      <LogicalName>error-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-32%402x.png">
+      <LogicalName>error-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-48.png">
+      <LogicalName>error-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\error-48%402x.png">
+      <LogicalName>error-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-16.png">
+      <LogicalName>done-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-16%402x.png">
+      <LogicalName>done-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\edit-16.png">
+      <LogicalName>edit-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\edit-16%402x.png">
+      <LogicalName>edit-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-16.png">
+      <LogicalName>star-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-16%402x.png">
+      <LogicalName>star-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-hover-16.png">
+      <LogicalName>star-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-hover-16%402x.png">
+      <LogicalName>star-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-overlay-16.png">
+      <LogicalName>star-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-overlay-16%402x.png">
+      <LogicalName>star-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-overlay-hover-16.png">
+      <LogicalName>star-overlay-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\star-overlay-hover-16%402x.png">
+      <LogicalName>star-overlay-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-16.png">
+      <LogicalName>unstar-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-16%402x.png">
+      <LogicalName>unstar-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-hover-16.png">
+      <LogicalName>unstar-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-hover-16%402x.png">
+      <LogicalName>unstar-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-overlay-16.png">
+      <LogicalName>unstar-overlay-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-overlay-16%402x.png">
+      <LogicalName>unstar-overlay-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-overlay-hover-16.png">
+      <LogicalName>unstar-overlay-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\unstar-overlay-hover-16%402x.png">
+      <LogicalName>unstar-overlay-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\remove-16.png">
+      <LogicalName>remove-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\remove-16%402x.png">
+      <LogicalName>remove-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\properties-16.png">
+      <LogicalName>properties-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\properties-16%402x.png">
+      <LogicalName>properties-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-load-save-16.png">
+      <LogicalName>prefs-load-save-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-load-save-16%402x.png">
+      <LogicalName>prefs-load-save-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-code-formatting-16.png">
+      <LogicalName>prefs-code-formatting-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-code-formatting-16%402x.png">
+      <LogicalName>prefs-code-formatting-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-language-16.png">
+      <LogicalName>prefs-language-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-language-16%402x.png">
+      <LogicalName>prefs-language-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-key-bindings-16.png">
+      <LogicalName>prefs-key-bindings-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-key-bindings-16%402x.png">
+      <LogicalName>prefs-key-bindings-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-fonts-16.png">
+      <LogicalName>prefs-fonts-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-fonts-16%402x.png">
+      <LogicalName>prefs-fonts-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-author-information-16.png">
+      <LogicalName>prefs-author-information-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-author-information-16%402x.png">
+      <LogicalName>prefs-author-information-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-sdk-locations-16.png">
+      <LogicalName>prefs-sdk-locations-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-sdk-locations-16%402x.png">
+      <LogicalName>prefs-sdk-locations-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-external-tools-16.png">
+      <LogicalName>prefs-external-tools-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-external-tools-16%402x.png">
+      <LogicalName>prefs-external-tools-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-build-16.png">
+      <LogicalName>prefs-build-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-build-16%402x.png">
+      <LogicalName>prefs-build-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-play-16.png">
+      <LogicalName>prefs-play-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-play-16%402x.png">
+      <LogicalName>prefs-play-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-updates-16.png">
+      <LogicalName>prefs-updates-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-updates-16%402x.png">
+      <LogicalName>prefs-updates-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-task-list-16.png">
+      <LogicalName>prefs-task-list-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-task-list-16%402x.png">
+      <LogicalName>prefs-task-list-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-generic-16.png">
+      <LogicalName>prefs-generic-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-generic-16%402x.png">
+      <LogicalName>prefs-generic-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-csharp-16.png">
+      <LogicalName>prefs-csharp-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-csharp-16%402x.png">
+      <LogicalName>prefs-csharp-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-standard-header-16.png">
+      <LogicalName>prefs-standard-header-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-standard-header-16%402x.png">
+      <LogicalName>prefs-standard-header-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-dotnet-naming-policies-16.png">
+      <LogicalName>prefs-dotnet-naming-policies-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-dotnet-naming-policies-16%402x.png">
+      <LogicalName>prefs-dotnet-naming-policies-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-code-templates-16.png">
+      <LogicalName>prefs-code-templates-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-code-templates-16%402x.png">
+      <LogicalName>prefs-code-templates-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-name-conventions-16.png">
+      <LogicalName>prefs-name-conventions-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\prefs-name-conventions-16%402x.png">
+      <LogicalName>prefs-name-conventions-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\copy-16.png">
+      <LogicalName>copy-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\copy-16%402x.png">
+      <LogicalName>copy-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\find-16.png">
+      <LogicalName>find-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\find-16%402x.png">
+      <LogicalName>find-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\find-and-replace-16.png">
+      <LogicalName>find-and-replace-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\find-and-replace-16%402x.png">
+      <LogicalName>find-and-replace-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-back-16.png">
+      <LogicalName>go-back-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-back-16%402x.png">
+      <LogicalName>go-back-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-down-16.png">
+      <LogicalName>go-down-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-down-16%402x.png">
+      <LogicalName>go-down-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-forward-16.png">
+      <LogicalName>go-forward-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-forward-16%402x.png">
+      <LogicalName>go-forward-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-up-16.png">
+      <LogicalName>go-up-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\go-up-16%402x.png">
+      <LogicalName>go-up-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\undo-16.png">
+      <LogicalName>undo-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\undo-16%402x.png">
+      <LogicalName>undo-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\home-16.png">
+      <LogicalName>home-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\home-16%402x.png">
+      <LogicalName>home-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\jump-to-16.png">
+      <LogicalName>jump-to-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\jump-to-16%402x.png">
+      <LogicalName>jump-to-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\media-play-16.png">
+      <LogicalName>media-play-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\media-play-16%402x.png">
+      <LogicalName>media-play-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\missing-image-16.png">
+      <LogicalName>missing-image-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\missing-image-16%402x.png">
+      <LogicalName>missing-image-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\open-16.png">
+      <LogicalName>open-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\refresh-16.png">
+      <LogicalName>refresh-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\refresh-16%402x.png">
+      <LogicalName>refresh-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\save-16.png">
+      <LogicalName>save-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\save-all-16.png">
+      <LogicalName>save-all-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\zoom-in-16.png">
+      <LogicalName>zoom-in-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\zoom-in-16%402x.png">
+      <LogicalName>zoom-in-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\zoom-out-16.png">
+      <LogicalName>zoom-out-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\zoom-out-16%402x.png">
+      <LogicalName>zoom-out-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-1.png">
+      <LogicalName>spinner-14-1.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-1%402x.png">
+      <LogicalName>spinner-14-1@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-2.png">
+      <LogicalName>spinner-14-2.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-2%402x.png">
+      <LogicalName>spinner-14-2@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-3.png">
+      <LogicalName>spinner-14-3.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-3%402x.png">
+      <LogicalName>spinner-14-3@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-4.png">
+      <LogicalName>spinner-14-4.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-4%402x.png">
+      <LogicalName>spinner-14-4@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-5.png">
+      <LogicalName>spinner-14-5.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-14-5%402x.png">
+      <LogicalName>spinner-14-5@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-1.png">
+      <LogicalName>spinner-18-1.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-1%402x.png">
+      <LogicalName>spinner-18-1@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-2.png">
+      <LogicalName>spinner-18-2.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-2%402x.png">
+      <LogicalName>spinner-18-2@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-3.png">
+      <LogicalName>spinner-18-3.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-3%402x.png">
+      <LogicalName>spinner-18-3@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-4.png">
+      <LogicalName>spinner-18-4.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-4%402x.png">
+      <LogicalName>spinner-18-4@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-5.png">
+      <LogicalName>spinner-18-5.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-18-5%402x.png">
+      <LogicalName>spinner-18-5@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\catchpoint-16.png">
+      <LogicalName>catchpoint-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\catchpoint-16%402x.png">
+      <LogicalName>catchpoint-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\catchpoint-disabled-16.png">
+      <LogicalName>catchpoint-disabled-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\catchpoint-disabled-16%402x.png">
+      <LogicalName>catchpoint-disabled-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-information-16.png">
+      <LogicalName>project-status-information-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-information-16%402x.png">
+      <LogicalName>project-status-information-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-warning-16.png">
+      <LogicalName>project-status-warning-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-warning-16%402x.png">
+      <LogicalName>project-status-warning-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-error-16.png">
+      <LogicalName>project-status-error-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-status-error-16%402x.png">
+      <LogicalName>project-status-error-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-android-16%402x.png">
+      <LogicalName>platform-android-light-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-cross-platform-16.png">
+      <LogicalName>platform-cross-platform-light-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-cross-platform-16%402x.png">
+      <LogicalName>platform-cross-platform-light-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-ios-16.png">
+      <LogicalName>platform-ios-light-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-ios-16%402x.png">
+      <LogicalName>platform-ios-light-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-mac-16.png">
+      <LogicalName>platform-mac-light-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-mac-16%402x.png">
+      <LogicalName>platform-mac-light-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-other-16.png">
+      <LogicalName>platform-other-light-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-other-16%402x.png">
+      <LogicalName>platform-other-light-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\platform-android-16.png">
+      <LogicalName>platform-android-light-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\generic-project.png">
+      <LogicalName>generic-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\generic-project%402x.png">
+      <LogicalName>generic-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\blank-solution.png">
+      <LogicalName>blank-solution.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\blank-solution%402x.png">
+      <LogicalName>blank-solution@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\console-project.png">
+      <LogicalName>console-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\console-project%402x.png">
+      <LogicalName>console-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\library-project.png">
+      <LogicalName>library-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\library-project%402x.png">
+      <LogicalName>library-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\pcl-project.png">
+      <LogicalName>pcl-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\pcl-project%402x.png">
+      <LogicalName>pcl-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\shared-project.png">
+      <LogicalName>shared-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\shared-project%402x.png">
+      <LogicalName>shared-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\workspace.png">
+      <LogicalName>workspace.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\workspace%402x.png">
+      <LogicalName>workspace@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\gtk2-project.png">
+      <LogicalName>gtk2-project.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="templates\images\gtk2-project%402x.png">
+      <LogicalName>gtk2-project@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-active-16.png">
+      <LogicalName>preview-active-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-active-16%402x.png">
+      <LogicalName>preview-active-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-hover-16.png">
+      <LogicalName>preview-hover-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-hover-16%402x.png">
+      <LogicalName>preview-hover-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-normal-16.png">
+      <LogicalName>preview-normal-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-normal-16%402x.png">
+      <LogicalName>preview-normal-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-selected-16.png">
+      <LogicalName>preview-selected-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\preview-selected-16%402x.png">
+      <LogicalName>preview-selected-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-1-16.png">
+      <LogicalName>spinner-normal-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-1-16%402x.png">
+      <LogicalName>spinner-normal-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-2-16.png">
+      <LogicalName>spinner-normal-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-2-16%402x.png">
+      <LogicalName>spinner-normal-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-3-16.png">
+      <LogicalName>spinner-normal-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-3-16%402x.png">
+      <LogicalName>spinner-normal-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-4-16.png">
+      <LogicalName>spinner-normal-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-4-16%402x.png">
+      <LogicalName>spinner-normal-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-5-16.png">
+      <LogicalName>spinner-normal-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-normal-5-16%402x.png">
+      <LogicalName>spinner-normal-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-1-16.png">
+      <LogicalName>spinner-selected-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-1-16%402x.png">
+      <LogicalName>spinner-selected-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-2-16.png">
+      <LogicalName>spinner-selected-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-2-16%402x.png">
+      <LogicalName>spinner-selected-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-3-16.png">
+      <LogicalName>spinner-selected-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-3-16%402x.png">
+      <LogicalName>spinner-selected-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-4-16.png">
+      <LogicalName>spinner-selected-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-4-16%402x.png">
+      <LogicalName>spinner-selected-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-5-16.png">
+      <LogicalName>spinner-selected-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\spinner-selected-5-16%402x.png">
+      <LogicalName>spinner-selected-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-24.png">
+      <LogicalName>done-24.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-24%402x.png">
+      <LogicalName>done-24@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-32.png">
+      <LogicalName>done-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-32%402x.png">
+      <LogicalName>done-32@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-48.png">
+      <LogicalName>done-48.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\done-48%402x.png">
+      <LogicalName>done-48@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-nunit-overlay-32.png">
+      <LogicalName>project-nunit-overlay-32.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\project-nunit-overlay-32%402x.png">
+      <LogicalName>project-nunit-overlay-32@2x.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' != 'DebugMac' AND '$(Configuration)' != 'ReleaseMac' ">
+    <EmbeddedResource Include="icons\status-building-1-14.png">
+      <LogicalName>status-building-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-1-14%402x.png">
+      <LogicalName>status-building-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-2-14.png">
+      <LogicalName>status-building-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-2-14%402x.png">
+      <LogicalName>status-building-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-3-14.png">
+      <LogicalName>status-building-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-3-14%402x.png">
+      <LogicalName>status-building-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-4-14.png">
+      <LogicalName>status-building-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-4-14%402x.png">
+      <LogicalName>status-building-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-5-14.png">
+      <LogicalName>status-building-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-building-5-14%402x.png">
+      <LogicalName>status-building-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-1-14.png">
+      <LogicalName>status-searching-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-1-14%402x.png">
+      <LogicalName>status-searching-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-2-14.png">
+      <LogicalName>status-searching-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-2-14%402x.png">
+      <LogicalName>status-searching-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-3-14.png">
+      <LogicalName>status-searching-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-3-14%402x.png">
+      <LogicalName>status-searching-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-4-14.png">
+      <LogicalName>status-searching-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-searching-4-14%402x.png">
+      <LogicalName>status-searching-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-1-14.png">
+      <LogicalName>status-pushing-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-1-14%402x.png">
+      <LogicalName>status-pushing-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-2-14.png">
+      <LogicalName>status-pushing-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-2-14%402x.png">
+      <LogicalName>status-pushing-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-3-14.png">
+      <LogicalName>status-pushing-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-3-14%402x.png">
+      <LogicalName>status-pushing-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-4-14.png">
+      <LogicalName>status-pushing-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-4-14%402x.png">
+      <LogicalName>status-pushing-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-5-14.png">
+      <LogicalName>status-pushing-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-5-14%402x.png">
+      <LogicalName>status-pushing-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-6-14.png">
+      <LogicalName>status-pushing-6-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pushing-6-14%402x.png">
+      <LogicalName>status-pushing-6-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-1-14.png">
+      <LogicalName>status-pulling-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-1-14%402x.png">
+      <LogicalName>status-pulling-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-2-14.png">
+      <LogicalName>status-pulling-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-2-14%402x.png">
+      <LogicalName>status-pulling-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-3-14.png">
+      <LogicalName>status-pulling-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-3-14%402x.png">
+      <LogicalName>status-pulling-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-4-14.png">
+      <LogicalName>status-pulling-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-4-14%402x.png">
+      <LogicalName>status-pulling-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-5-14.png">
+      <LogicalName>status-pulling-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-5-14%402x.png">
+      <LogicalName>status-pulling-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-6-14.png">
+      <LogicalName>status-pulling-6-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-pulling-6-14%402x.png">
+      <LogicalName>status-pulling-6-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-1-14.png">
+      <LogicalName>status-opening-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-1-14%402x.png">
+      <LogicalName>status-opening-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-2-14.png">
+      <LogicalName>status-opening-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-2-14%402x.png">
+      <LogicalName>status-opening-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-3-14.png">
+      <LogicalName>status-opening-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-3-14%402x.png">
+      <LogicalName>status-opening-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-4-14.png">
+      <LogicalName>status-opening-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-4-14%402x.png">
+      <LogicalName>status-opening-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-5-14.png">
+      <LogicalName>status-opening-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-5-14%402x.png">
+      <LogicalName>status-opening-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-6-14.png">
+      <LogicalName>status-opening-6-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-opening-6-14%402x.png">
+      <LogicalName>status-opening-6-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-ready-14.png">
+      <LogicalName>status-ready-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-ready-14%402x.png">
+      <LogicalName>status-ready-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-success-14.png">
+      <LogicalName>status-success-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-success-14%402x.png">
+      <LogicalName>status-success-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-warning-14.png">
+      <LogicalName>status-warning-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-warning-14%402x.png">
+      <LogicalName>status-warning-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-failure-14.png">
+      <LogicalName>status-failure-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-failure-14%402x.png">
+      <LogicalName>status-failure-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-1-14.png">
+      <LogicalName>status-connecting-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-1-14%402x.png">
+      <LogicalName>status-connecting-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-2-14.png">
+      <LogicalName>status-connecting-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-2-14%402x.png">
+      <LogicalName>status-connecting-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-3-14.png">
+      <LogicalName>status-connecting-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-3-14%402x.png">
+      <LogicalName>status-connecting-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-4-14.png">
+      <LogicalName>status-connecting-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-4-14%402x.png">
+      <LogicalName>status-connecting-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-5-14.png">
+      <LogicalName>status-connecting-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-5-14%402x.png">
+      <LogicalName>status-connecting-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-6-14.png">
+      <LogicalName>status-connecting-6-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-connecting-6-14%402x.png">
+      <LogicalName>status-connecting-6-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-1-14.png">
+      <LogicalName>status-waiting-1-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-1-14%402x.png">
+      <LogicalName>status-waiting-1-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-2-14.png">
+      <LogicalName>status-waiting-2-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-2-14%402x.png">
+      <LogicalName>status-waiting-2-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-3-14.png">
+      <LogicalName>status-waiting-3-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-3-14%402x.png">
+      <LogicalName>status-waiting-3-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-4-14.png">
+      <LogicalName>status-waiting-4-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-4-14%402x.png">
+      <LogicalName>status-waiting-4-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-5-14.png">
+      <LogicalName>status-waiting-5-14.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\status-waiting-5-14%402x.png">
+      <LogicalName>status-waiting-5-14@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\parser-16.png">
+      <LogicalName>parser-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\parser-16%402x.png">
+      <LogicalName>parser-16@2x.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)' == 'DebugMac' OR '$(Configuration)' == 'ReleaseMac' ">
+    <EmbeddedResource Include="icons\mac\status-building-1-16.png">
+      <LogicalName>status-building-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-1-16%402x.png">
+      <LogicalName>status-building-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-2-16.png">
+      <LogicalName>status-building-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-2-16%402x.png">
+      <LogicalName>status-building-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-3-16.png">
+      <LogicalName>status-building-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-3-16%402x.png">
+      <LogicalName>status-building-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-4-16.png">
+      <LogicalName>status-building-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-4-16%402x.png">
+      <LogicalName>status-building-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-5-16.png">
+      <LogicalName>status-building-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-building-5-16%402x.png">
+      <LogicalName>status-building-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-1-16.png">
+      <LogicalName>status-connecting-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-1-16%402x.png">
+      <LogicalName>status-connecting-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-2-16.png">
+      <LogicalName>status-connecting-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-2-16%402x.png">
+      <LogicalName>status-connecting-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-3-16.png">
+      <LogicalName>status-connecting-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-3-16%402x.png">
+      <LogicalName>status-connecting-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-4-16.png">
+      <LogicalName>status-connecting-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-4-16%402x.png">
+      <LogicalName>status-connecting-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-5-16.png">
+      <LogicalName>status-connecting-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-5-16%402x.png">
+      <LogicalName>status-connecting-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-6-16.png">
+      <LogicalName>status-connecting-6-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-connecting-6-16%402x.png">
+      <LogicalName>status-connecting-6-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-paused-16.png">
+      <LogicalName>status-updates-paused-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-paused-16%402x.png">
+      <LogicalName>status-updates-paused-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-ready-16.png">
+      <LogicalName>status-updates-ready-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-ready-16%402x.png">
+      <LogicalName>status-updates-ready-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-error-16.png">
+      <LogicalName>status-error-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-error-16%402x.png">
+      <LogicalName>status-error-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-error-count-16.png">
+      <LogicalName>status-error-count-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-error-count-16%402x.png">
+      <LogicalName>status-error-count-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-1-16.png">
+      <LogicalName>status-opening-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-1-16%402x.png">
+      <LogicalName>status-opening-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-2-16.png">
+      <LogicalName>status-opening-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-2-16%402x.png">
+      <LogicalName>status-opening-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-3-16.png">
+      <LogicalName>status-opening-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-3-16%402x.png">
+      <LogicalName>status-opening-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-4-16.png">
+      <LogicalName>status-opening-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-4-16%402x.png">
+      <LogicalName>status-opening-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-5-16.png">
+      <LogicalName>status-opening-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-5-16%402x.png">
+      <LogicalName>status-opening-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-6-16.png">
+      <LogicalName>status-opening-6-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-opening-6-16%402x.png">
+      <LogicalName>status-opening-6-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-parsing-16.png">
+      <LogicalName>status-parsing-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-parsing-16%402x.png">
+      <LogicalName>status-parsing-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-1-16.png">
+      <LogicalName>status-pulling-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-1-16%402x.png">
+      <LogicalName>status-pulling-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-2-16.png">
+      <LogicalName>status-pulling-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-2-16%402x.png">
+      <LogicalName>status-pulling-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-3-16.png">
+      <LogicalName>status-pulling-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-3-16%402x.png">
+      <LogicalName>status-pulling-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-4-16.png">
+      <LogicalName>status-pulling-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-4-16%402x.png">
+      <LogicalName>status-pulling-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-5-16.png">
+      <LogicalName>status-pulling-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-5-16%402x.png">
+      <LogicalName>status-pulling-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-6-16.png">
+      <LogicalName>status-pulling-6-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pulling-6-16%402x.png">
+      <LogicalName>status-pulling-6-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-1-16.png">
+      <LogicalName>status-pushing-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-1-16%402x.png">
+      <LogicalName>status-pushing-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-2-16.png">
+      <LogicalName>status-pushing-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-2-16%402x.png">
+      <LogicalName>status-pushing-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-3-16.png">
+      <LogicalName>status-pushing-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-3-16%402x.png">
+      <LogicalName>status-pushing-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-4-16.png">
+      <LogicalName>status-pushing-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-4-16%402x.png">
+      <LogicalName>status-pushing-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-5-16.png">
+      <LogicalName>status-pushing-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-5-16%402x.png">
+      <LogicalName>status-pushing-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-6-16.png">
+      <LogicalName>status-pushing-6-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-pushing-6-16%402x.png">
+      <LogicalName>status-pushing-6-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-ready-16.png">
+      <LogicalName>status-ready-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-ready-16%402x.png">
+      <LogicalName>status-ready-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-1-16.png">
+      <LogicalName>status-searching-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-1-16%402x.png">
+      <LogicalName>status-searching-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-2-16.png">
+      <LogicalName>status-searching-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-2-16%402x.png">
+      <LogicalName>status-searching-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-3-16.png">
+      <LogicalName>status-searching-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-3-16%402x.png">
+      <LogicalName>status-searching-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-4-16.png">
+      <LogicalName>status-searching-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-searching-4-16%402x.png">
+      <LogicalName>status-searching-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-success-16.png">
+      <LogicalName>status-success-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-success-16%402x.png">
+      <LogicalName>status-success-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-1-16.png">
+      <LogicalName>status-updates-downloading-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-1-16%402x.png">
+      <LogicalName>status-updates-downloading-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-2-16.png">
+      <LogicalName>status-updates-downloading-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-2-16%402x.png">
+      <LogicalName>status-updates-downloading-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-3-16.png">
+      <LogicalName>status-updates-downloading-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-3-16%402x.png">
+      <LogicalName>status-updates-downloading-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-4-16.png">
+      <LogicalName>status-updates-downloading-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-4-16%402x.png">
+      <LogicalName>status-updates-downloading-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-5-16.png">
+      <LogicalName>status-updates-downloading-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-5-16%402x.png">
+      <LogicalName>status-updates-downloading-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-6-16.png">
+      <LogicalName>status-updates-downloading-6-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-updates-downloading-6-16%402x.png">
+      <LogicalName>status-updates-downloading-6-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-1-16.png">
+      <LogicalName>status-waiting-1-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-1-16%402x.png">
+      <LogicalName>status-waiting-1-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-2-16.png">
+      <LogicalName>status-waiting-2-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-2-16%402x.png">
+      <LogicalName>status-waiting-2-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-3-16.png">
+      <LogicalName>status-waiting-3-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-3-16%402x.png">
+      <LogicalName>status-waiting-3-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-4-16.png">
+      <LogicalName>status-waiting-4-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-4-16%402x.png">
+      <LogicalName>status-waiting-4-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-5-16.png">
+      <LogicalName>status-waiting-5-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-waiting-5-16%402x.png">
+      <LogicalName>status-waiting-5-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-warning-16.png">
+      <LogicalName>status-warning-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-warning-16%402x.png">
+      <LogicalName>status-warning-16@2x.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-warning-count-16.png">
+      <LogicalName>status-warning-count-16.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="icons\mac\status-warning-count-16%402x.png">
+      <LogicalName>status-warning-count-16@2x.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MonoDevelop.Ide.Commands\CustomStringTagProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\EditCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\FileCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\HelpCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\ProjectCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\SearchCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\ToolsCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\ViewCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\WindowCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DisplayBindingService.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\BackgroundProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\Task.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\TaskService.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\ContextPadCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\WorkbenchContextCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\CombineOpenCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\LanguageActiveCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\ProjectActiveCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.ExternalTools\ExternalTool.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplateService.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\FileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\FileTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ICustomProjectCIEntry.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\INewFileCreator.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectDescriptor.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TextFileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\CodeDomFileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\SingleFileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\SolutionDescriptor.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ResourceFileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\AbstractBaseViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\AbstractPadContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\AbstractViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IBaseViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IPadContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IWorkbenchWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\ViewCommandHandlers.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IBookmarkBuffer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IClipboardHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IEditableTextBuffer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IPrintable.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ITextBuffer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\CommonAboutDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\DirtyFilesDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\NewLayoutDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\AboutMonoDevelopTabPage.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\VersionInformationTabPage.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\TipOfTheDay.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\AddinLoadErrorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\BuildPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\LoadSavePanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\AddInsOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\DefaultMonitorPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\MonodocTreePad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\SolutionFolderNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\FolderNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectFileNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectFolder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectFolderNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectReferenceFolderNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectReferenceNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ProjectSolutionPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ShowAllFilesBuilderExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\SystemFile.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\SystemFileNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\SolutionPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\TreeViewPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DefaultWorkbench.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\WorkbenchMemento.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\SdiWorkspaceWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\DisplayBindingCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\FileTemplateTypeCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\ProjectTemplateCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\NodeBuilderCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\PadCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\PadOptionCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\SolutionPadCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ISolutionItemDescriptor.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\SolutionItemDescriptor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\ConfigurationComboBox.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IPadContainer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\Document.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\Pad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\Workbench.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StartupInfo.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\ProgressMonitors.cs" />
+    <Compile Include="MonoDevelop.Ide\Services.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\TasksOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\FileViewer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\TaskListPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\CodeTranslationFileDescriptionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\SelectEncodingsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\FileSelectorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IEncodedTextContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\TaskPriority.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads\ErrorListPad.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\ITaskListView.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\TaskListViewCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\CommentTasksView.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\UserTasksView.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\LayoutComboBox.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IExtensibleTextEditor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\UnknownEntryNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\TextEditorExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\NavigationCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.StandardHeader\StandardHeaderService.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\InternalLog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\KeyBindingsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.KeyBindingsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\TextEditorCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Commands\FileTabCommands.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.BuildPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.LoadSavePanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.NewLayoutDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.SelectEncodingsDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.TasksPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.TipOfTheDayWindow.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.AddInsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.AddinLoadErrorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\FileFilterCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.ExternalTools\ExternalToolService.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\FileTemplateReference.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\FileTemplateConditionTypeCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ClrVersionFileTemplateCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\FileTemplateCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\PartialTypeFileTemplateCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ParentProjectFileTemplateCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\CompletionTextEditorExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\ToolbarComboBox.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ISplittable.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IFoldable.cs" />
+    <Compile Include="MonoDevelop.Ide.ExternalTools\ExternalToolPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.ExternalTools.ExternalToolPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\MonoDevelopStatusBar.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DocumentSwitcher.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\IDEStyleOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.IDEStyleOptionsPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IZoomable.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\SolutionNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\WorkspaceNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\DocumentStateTracker.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IPathedDocument.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\CategoryNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ExtensibleTreeView.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ITreeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ITreeBuilderContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ITreeNavigator.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ITreeOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\NodeAttributes.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\NodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\NodeBuilderExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\NodeCommandHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\NodeState.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\DragOperation.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TreePadOption.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TypeNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TreeViewItem.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TreeNodeNavigator.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TreeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TreeOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\TransactedTreeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\INavigable.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IOpenNamedElementHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ISmartIndenter.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ITextEditorResolver.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\AuthorInformationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\GlobalAuthorInformationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.StandardHeader\StandardHeaderPolicyPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.AuthorInformationPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.GlobalAuthorInformationPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.StandardHeader.StandardHeaderPolicyPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\TextStylePolicyPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.TextStylePolicyPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\TextStylePolicy.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\PadFontChanger.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\PadTreeView.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\PadContextMenuExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\FileOperationsBuilderExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\DirectoryTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\IUndoHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\CodeFormatterService.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplatePanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.CodeTemplates.CodeTemplatePanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\EditTemplateDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.CodeTemplates.EditTemplateDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplateVariable.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\ExpansionObject.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplateCompletionData.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplateListDataProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\MonoRuntimePanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.MonoRuntimePanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\SearchResult.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\SearchResultPad.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\FindInFilesDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.FindInFiles.FindInFilesDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\Commands.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\Scope.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\FileProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\FilterOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\FindReplace.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\SearchResultWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\ISearchProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\SearchProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IAttachableViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\AbstractAttachableViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\CodeFormattingCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\ParameterizedExecutionHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\ExecutionModeCommandService.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CustomArgsCustomizer.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CommandExecutionContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\IExecutionConfigurationEditor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ExecutionModeComboBox.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Components.ExecutionModeComboBox.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\IExecutionCommandCustomizer.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CustomExecutionMode.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\MonoExecutionParameters.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\MonoExecutionCustomizer.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\SelectFileFormatDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.SelectFileFormatDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\MaintenanceOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.MaintenanceOptionsPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\TaskStore.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\AssemblyFoldersPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.AssemblyFoldersPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ISupportsProjectReload.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\BuildMessagePanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.OptionPanels.BuildMessagePanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\HiddenWorkbenchWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\HiddenTextEditorViewContent.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\WorkbenchWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeTemplates\CodeTemplateCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Content\ILocationList.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\OpenFileDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\IOpenFileDialogHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\IAddFileDialogHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\TextEditorExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DockItemToolbarLoader.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\LogView.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\WorkbenchContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\LayoutExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\CustomToolExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\CustomTool.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\CustomToolService.cs" />
+    <Compile Include="MonoDevelop.Components\FileSelector.cs" />
+    <Compile Include="MonoDevelop.Components\BaseFileEntry.cs" />
+    <Compile Include="MonoDevelop.Components\FileEntry.cs" />
+    <Compile Include="MonoDevelop.Components\FolderDialog.cs" />
+    <Compile Include="MonoDevelop.Components\FolderEntry.cs" />
+    <Compile Include="MonoDevelop.Components\TabLabel.cs" />
+    <Compile Include="MonoDevelop.Components\CellRendererComboBox.cs" />
+    <Compile Include="MonoDevelop.Components\TreeViewCellContainer.cs" />
+    <Compile Include="MonoDevelop.Components\TreeViewState.cs" />
+    <Compile Include="MonoDevelop.Components\MenuButton.cs" />
+    <Compile Include="MonoDevelop.Components\FixedWidthWrapLabel.cs" />
+    <Compile Include="MonoDevelop.Components\TooltipWindow.cs" />
+    <Compile Include="MonoDevelop.Components\ConsoleView.cs" />
+    <Compile Include="MonoDevelop.Components\FolderListSelector.cs" />
+    <Compile Include="MonoDevelop.Components\InfoBar.cs" />
+    <Compile Include="MonoDevelop.Components\GtkUtil.cs" />
+    <Compile Include="MonoDevelop.Components\MiniButton.cs" />
+    <Compile Include="MonoDevelop.Components\SearchEntry.cs" />
+    <Compile Include="MonoDevelop.Components\HoverImageButton.cs" />
+    <Compile Include="MonoDevelop.Components\PathBar.cs" />
+    <Compile Include="MonoDevelop.Components\SelectFileDialog.cs" />
+    <Compile Include="MonoDevelop.Components\SelectFolderDialog.cs" />
+    <Compile Include="MonoDevelop.Components\RoundedFrame.cs" />
+    <Compile Include="MonoDevelop.Components\CairoExtensions.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\Axis.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\AxisDimension.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\AxisPosition.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\BasicChart.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\ChartCursor.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\DateTimeAxis.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\IntegerAxis.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\Serie.cs" />
+    <Compile Include="MonoDevelop.Components.Chart\TickEnumerator.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ActionCommand.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ActionType.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\Command.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandArrayInfo.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandCheckMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandEntry.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandEntrySet.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandErrorHandler.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandFrame.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandHandler.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandHandlerAttribute.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandInfo.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandInfoSet.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandManager.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandMenu.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandMenuBar.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandSystemCommands.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandToggleToolButton.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandToolbar.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandToolButton.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CustomCommand.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CustomMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandRouter.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandUserItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\LinkCommandEntry.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\MenuToolButton.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandDelegatorRouter.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandRouterContainer.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandTargetVisitor.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\KeyBindingManager.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\KeyBindingService.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CustomItem.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CommandSelectedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\IMultiCastCommandRouter.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandUpdateHandler.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CustomCommandUpdaterAttribute.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\KeyBindingScheme.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\KeyBindingSet.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandBar.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\CommandCategoryCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\CommandCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\CommandItemCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\ItemSetCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\LinkItemCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\SeparatorItemCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\LocalCommandItemCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Commands.ExtensionNodes\SchemeExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\ArrowWindow.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockedPosition.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockGrip.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbar.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarFrame.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarFrameLayout.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarFrameStatus.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarPanel.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarPosition.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\DockToolbarStatus.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\FixedPanel.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\FloatingDock.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\FloatingPosition.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\IDockBar.cs" />
+    <Compile Include="MonoDevelop.Components.DockToolbars\PlaceholderWindow.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\PlatformDialog.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\ISelectFileDialog.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\DefaultPropertyTab.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\EditorManager.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\EventPropertyTab.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyEditorCell.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyEditorTypeAttribute.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyGrid.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyValueChangedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyValueChangedEventHandler.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\SurrogateUITypeEditorAttribute.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\CharPropertyEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\CollectionEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\ColorEditorCell.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\DateTimeEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\DefaultEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\EnumerationEditorCell.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\EventEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\FlagsEditorCell.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\FlagsSelectorDialog.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\FloatRange.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\IntRange.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\TextEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\TextEditorDialog.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\TimeSpanEditor.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\BooleanEditorCell.cs" />
+    <Compile Include="MonoDevelop.Components.Theming\GtkColors.cs" />
+    <Compile Include="MonoDevelop.Components.Theming\GtkTheme.cs" />
+    <Compile Include="MonoDevelop.Components.Theming\Theme.cs" />
+    <Compile Include="MonoDevelop.Components.Theming\ThemeContext.cs" />
+    <Compile Include="MonoDevelop.Components.Theming\ThemeEngine.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Components.FolderListSelector.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\AutoHideBox.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockBar.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockBarItem.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockContainer.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockFrame.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockFrameTopLevel.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockGroup.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockGroupItem.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockGroupType.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItem.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItemBehavior.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItemContainer.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItemStatus.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItemToolbar.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockLayout.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockObject.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockPosition.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\PlaceholderWindow.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\TabStrip.cs" />
+    <Compile Include="MonoDevelop.Components\MenuButtonEntry.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\IOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MultiMessageDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MultiTaskProgressDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\OptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\OptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\ProgressDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\SetupApp.cs" />
+    <Compile Include="MonoDevelop.Ide.ProgressMonitoring\BaseProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.ProgressMonitoring\MessageDialogProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.ProgressMonitoring\MultiTaskDialogProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\IWebBrowser.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\LocationChangedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\TitleChangedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\StatusMessageChangedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\LoadingProgressChangedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\LocationChangingEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.WebBrowser\IWebBrowserLoader.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionListWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ICompletionWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ListWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ParameterInformationWindowManager.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ParameterInformationWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionData.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionDataList.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\MutableCompletionDataList.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionWindowManager.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ListWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CodeCompletionContext.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CodeCompletionContextEventArgs.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.MultiMessageDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.MultiTaskProgressDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Dialogs.ProgressDialog.cs" />
+    <Compile Include="MonoDevelop.Ide\DesktopService.cs" />
+    <Compile Include="MonoDevelop.Ide\DispatchService.cs" />
+    <Compile Include="MonoDevelop.Ide\Ide.cs" />
+    <Compile Include="MonoDevelop.Ide\IdePreferences.cs" />
+    <Compile Include="MonoDevelop.Ide\RootWorkspace.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\DefaultPlatformService.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\DesktopApplication.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\RecentFileStorage.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\RecentItem.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\RecentOpen.cs" />
+    <Compile Include="MonoDevelop.Ide\GLibLogging.cs" />
+    <Compile Include="MonoDevelop.Ide\ImageService.cs" />
+    <Compile Include="MonoDevelop.Ide.Desktop\PlatformService.cs" />
+    <Compile Include="MonoDevelop.Ide\MessageService.cs" />
+    <Compile Include="MonoDevelop.Ide\WebBrowserService.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\AsyncDispatchAttribute.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\FreeDispatchAttribute.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\GuiSyncContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\GuiSyncObject.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IMementoCapable.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StockIcons.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\SyncContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\SyncContextAttribute.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\SyncObject.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ProjectFileEntry.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\ItemOptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\ItemOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MimeTypePolicyOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MimeTypePolicyOptionsSection.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MultiConfigItemOptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\MultiConfigItemOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ProjectOptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\RenameConfigDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewFileDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\AddFileDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\AddMimeTypeDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\AssemblyReferencePanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\CombineOptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ConfirmProjectDeleteDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\DefaultPolicyOptionsDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\DeleteConfigDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewConfigurationDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ProjectFileSelectorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide\ProjectOperations.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\IncludeNewFilesDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CustomExecutionModeDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CustomExecutionModeManagerDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\CustomExecutionModeWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\MonoExecutionParametersPreview.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\MonoExecutionParametersWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ProjectReferencePanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\SelectReferenceDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.BaseDirectoryPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CodeFormattingPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CombineBuildOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CombineConfigurationPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CombineInformationWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CommonAssemblySigningPreferences.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CustomCommandPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CustomCommandWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.GeneralProjectOptionsWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.NamespaceSynchronisationPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.OutputOptionsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.RunOptionsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.RuntimeOptionsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.CombineEntryConfigurationsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.StartupOptionsPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\BaseDirectoryPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\BaseDirectoryPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CodeFormattingPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CombineBuildOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CombineConfigurationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CombineInformationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CommonAssemblySigningPreferences.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CustomCommandPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CustomCommandPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CustomCommandWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\GeneralProjectOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\NamespaceSynchronisationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\OutputOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\RunOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\RuntimeOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\SolutionItemConfigurationsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\StartupOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.AddMimeTypeDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ConfirmProjectDeleteDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.DeleteConfigDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.IncludeNewFilesDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.NewConfigurationDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.NewFileDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\PolicyOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ProjectFileSelectorDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.RenameConfigDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.SelectReferenceDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Execution.CustomExecutionModeDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Execution.CustomExecutionModeManagerDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Execution.CustomExecutionModeWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Execution.MonoExecutionParametersPreview.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Execution.MonoExecutionParametersWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\EnvVarList.cs" />
+    <Compile Include="MonoDevelop.Ide\HelpOperations.cs" />
+    <Compile Include="MonoDevelop.Ide\ExitEventHandler.cs" />
+    <Compile Include="MonoDevelop.Ide\AddEntryEventHandler.cs" />
+    <Compile Include="MonoDevelop.Ide\IdeStartup.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\MimeTypeNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\MimeTypeOptionsPanelNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\OptionsDialogSection.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\OptionsPanelNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\StockIconCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\StringTagSelectorButton.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Components.StringTagSelectorButton.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\SolutionFolderFileNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Components\CompactScrolledWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\MemberCompletionData.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\DocumentNavigationPoint.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\NavigationHistoryService.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\TextFileNavigationPoint.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\NavigationHistoryItem.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\NavigationPoint.cs" />
+    <Compile Include="MonoDevelop.Ide.Navigation\HistoryList.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AutoTestService.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AutoTestSession.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AutoTestClientSession.cs" />
+    <Compile Include="MonoDevelop.Components\DropDownBoxListWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionMatcher.cs" />
+    <Compile Include="MonoDevelop.Components\Tabstrip.cs" />
+    <Compile Include="MonoDevelop.Ide.Fonts\FontChooserPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Fonts.FontChooserPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Fonts\FontChooserPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Fonts\FontService.cs" />
+    <Compile Include="MonoDevelop.Ide.Fonts\FontDescriptionCodon.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\AlertDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\GtkAlertDialog.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\TextQuestionDialog.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\ErrorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\GtkErrorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\ICodeFormatter.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\IAdvancedCodeFormatter.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\DefaultCodeFormatter.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\CodeFormatterExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeFormatting\CodeFormatter.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\GtkSynchronizationContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewPolicySetDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.NewPolicySetDialog.cs" />
+    <Compile Include="MonoDevelop.Components\HeaderBox.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\StartupHandlerExtensionAttribute.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\ReferencesFinder.cs" />
+    <Compile Include="MonoDevelop.Components\SectionList.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\TemplatePickerWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewProjectOptionsWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\FileTypeCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\IDisplayBinding.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ExportProjectPolicyDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ExportProjectPolicyDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ApplyPolicyDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ApplyPolicyDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\ProjectSelectorWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Components.ProjectSelectorWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ProjectSelectorDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ProjectSelectorDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ImportProjectPolicyDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ImportProjectPolicyDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.ProgressMonitoring\ProgressBarMonitor.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.ProgressMonitoring.ProgressBarMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\AddExternalFileDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.AddExternalFileDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\PriorityList.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Gui.Components.PriorityList.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid.Editors\FilePathEditor.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\CommentTag.cs" />
+    <Compile Include="MonoDevelop.Ide.Tasks\CommentTasksChangedEventHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\MemberReference.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\XmlCodeDomReader.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassData.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassBrowserPad.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ClassBrowserPadWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\CombineNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\EventNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\FieldNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\MemberNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\MemberNodeCommandHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\MethodNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\NamespaceData.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\NamespaceNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ProjectNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\PropertyNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\SolutionNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ClassPad\ReferenceNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Dialogs\FeedbackDialog.cs" />
+    <Compile Include="MonoDevelop.Ide\FeedbackService.cs" />
+    <Compile Include="MonoDevelop.Ide.Updater\UpdateService.cs" />
+    <Compile Include="MonoDevelop.Ide.Updater\IUpdateHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Updater\AddinsUpdateHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Updater\UpdateCheckHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\SdkLocationPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\PackageReferencePanel.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageCommands.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageOptionPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageLinkButton.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageRecentProjectsList.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageLinksList.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\ProjectLoadProgressMonitor.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\CommonTextEditorOptions.cs" />
+    <Compile Include="MonoDevelop.Components\FileFilterSet.cs" />
+    <Compile Include="MonoDevelop.Ide\IdeVersionInfo.cs" />
+    <Compile Include="MonoDevelop.Components\ContextMenuTreeView.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.OptionPanels\LogAgentOptionsPanel.cs" />
+    <Compile Include="MonoDevelop.Ide\LogReportingStartup.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ExportSolutionDialog.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.ExportSolutionDialog.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\CustomCommandTargetAttribute.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\ServiceUrlExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide\ProjectCreatedEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\MemberCollector.cs" />
+    <Compile Include="MonoDevelop.Ide.FindInFiles\SearchCollector.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\ProjectContentEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\TypeSystemService.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\Ambience.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\AmbienceService.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\NetAmbience.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\OutputFlags.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\OutputSettings.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\StockIcons.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\FoldingRegion.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\ParsedDocument.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\Comment.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\Tag.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\PreProcessorDefine.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\ConditionalRegion.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\MarkupUtilities.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\CodeGenerationService.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\CodeGenerator.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\TypeSystemParserNode.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\MonoDocDocumentationProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\PortableRuntimeOptionsPanel.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.OptionPanels.PortableRuntimeOptionsPanelWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\Styles.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DocumentToolbar.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\MainToolbar.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\StatusArea.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\RoundButton.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\ButtonBar.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\ProjectCommentTags.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\ProjectSearchCategory.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\SearchCategory.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\ISearchDataSource.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\FileSearchCategory.cs" />
+    <Compile Include="MonoDevelop.Components.PropertyGrid\PropertyGridTable.cs" />
+    <Compile Include="MonoDevelop.Components\CompactDialog.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockVisualStyle.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\StyledProgressBar.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\SearchPopupWindow.cs" />
+    <Compile Include="MonoDevelop.Components\PopoverWindow.cs" />
+    <Compile Include="MonoDevelop.Components\TooltipPopoverWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Components\AnimatedIcon.cs" />
+    <Compile Include="MonoDevelop.Ide\DefaultWebCertificateProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\ParsedFileEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\MimeTypeExtensionNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\DocumentView.cs" />
+    <Compile Include="MonoDevelop.Components\VPanedThin.cs" />
+    <Compile Include="MonoDevelop.Components\HPanedThin.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\CommandSearchCategory.cs" />
+    <Compile Include="MonoDevelop.Components\ExtendedLabel.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\TooltipInformation.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\TooltipInformationWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\ParameterDataProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\TypeSystemParser.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageSection.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\Style.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageFeedItem.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageListButton.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageButtonBar.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageBarButton.cs" />
+    <Compile Include="MonoDevelop.Components\MouseTracker.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\SearchPopupSearchPattern.cs" />
+    <Compile Include="MonoDevelop.Components\PopoverWindowTheme.cs" />
+    <Compile Include="MonoDevelop.Ide\EditReferencesEventArgs.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\StatusAreaTheme.cs" />
+    <Compile Include="MonoDevelop.Components\PopoverWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\TextEditorService.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\FileLineExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\TopLevelWidgetExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\VerticalAlignment.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\HorizontalAlignment.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\TextLineMarkerExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\TextFileEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\LineCountEventArgs.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\FileExtension.cs" />
+    <Compile Include="MonoDevelop.Ide.TextEditing\FileExtensionEventArgs.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\StatusAreaBuildTheme.cs" />
+    <Compile Include="MonoDevelop.Components\ThreadedRenderer.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\ConfigurationMerger.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\NavigateToCommand.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\ResultsDataSource.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\SearchResult.cs" />
+    <Compile Include="MonoDevelop.Components\ImageButton.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\DefaultWelcomePage.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageService.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageFrame.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageRow.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageColumn.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\IWelcomePageProvider.cs" />
+    <Compile Include="MonoDevelop.Components.Docking\DockItemTitleTab.cs" />
+    <Compile Include="MonoDevelop.Ide.WelcomePage\WelcomePageFirstRun.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusBar.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusBarContextBase.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusBarContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusBarIcon.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\StatusBarContextImpl.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\MainStatusBarContextImpl.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\MonoDevelopProjectContent.cs" />
+    <Compile Include="MonoDevelop.Components.Commands\ICommandDelegator.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\ResXFileCodeGenerator.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\ThreadAsyncOperation.cs" />
+    <Compile Include="MonoDevelop.Components\CellRendererImage.cs" />
+    <Compile Include="MonoDevelop.Components\ImageView.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\IdeFileSystemExtensionExtension.cs" />
+    <Compile Include="AddinInfo.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionCharacters.cs" />
+    <Compile Include="MonoDevelop.Ide.CodeCompletion\CompletionCharacterCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.TypeSystem\IRefactoringContext.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\ImplicitFrameworkAssemblyReferenceNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui.Pads.ProjectPad\PortableFrameworkSubsetNodeBuilder.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\SearchInSolutionSearchCategory.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CombineMSBuildOptions.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\PadCollection.cs" />
+    <Compile Include="MonoDevelop.Ide.Extensions\IdeCustomizer.cs" />
+    <Compile Include="MonoDevelop.Components\ExtendedTitleBarWindow.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\IExtendedTitleBarWindowBackend.cs" />
+    <Compile Include="MonoDevelop.Components\DropDownBox.cs" />
+    <Compile Include="MonoDevelop.Components.Extensions\IExtendedTitleBarDialogBackend.cs" />
+    <Compile Include="MonoDevelop.Components\ExtendedTitleBarDialog.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplatePackageReference.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\PackageRepositoryNode.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\WorkspaceItemCreatedInformation.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\PackageReferencesForCreatedProject.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplatePackageInstaller.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\DockNotebook.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\PlaceholderWindow.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\TabStrip.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\TabEventArgs.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\DockNotebookTab.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\DockNotebookContainer.cs" />
+    <Compile Include="MonoDevelop.Components\CheckBoxContextMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components\ContextMenu.cs" />
+    <Compile Include="MonoDevelop.Components\ContextMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components\ContextMenuItemCollection.cs" />
+    <Compile Include="MonoDevelop.Components\RadioButtonContextMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components\RadioButtonContextMenuItemGroup.cs" />
+    <Compile Include="MonoDevelop.Components\SeparatorContextMenuItem.cs" />
+    <Compile Include="MonoDevelop.Components\ContextMenuExtensionsGtk.cs" />
+    <Compile Include="MonoDevelop.Ide.Gui\Split.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\PublicResXFileCodeGenerator.cs" />
+    <Compile Include="MonoDevelop.Components\ImageLoader.cs" />
+    <Compile Include="MonoDevelop.Components.DockNotebook\DockWindow.cs" />
+    <Compile Include="MonoDevelop.Ide.CustomTools\MSBuildCustomTool.cs" />
+    <Compile Include="MonoDevelop.Components\Control.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\SolutionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateCategory.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateWizard.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\WizardPage.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\INewProjectController.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewProjectController.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\GtkNewProjectDialogBackend.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\INewProjectDialogBackend.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\GtkNewProjectDialogBackend.UI.cs">
+      <DependentUpon>GtkNewProjectDialogBackend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonoDevelop.Ide.Projects\GtkProjectFolderPreviewWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.GtkProjectFolderPreviewWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\GtkProjectConfigurationWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.Ide.Projects.GtkProjectConfigurationWidget.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplatingService.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\TemplateCategoryCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplateCategorizer.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\DefaultSolutionTemplate.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\IProjectTemplatingProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplatingProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateCategoryPath.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProcessedTemplateResult.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\DefaultProcessedTemplateResult.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\FinalProjectConfigurationPage.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\GtkTemplateCategoryCellRenderer.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\GtkTemplateCellRenderer.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateWizardProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateCondition.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateParameter.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\IVersionControlProjectTemplateHandler.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\TemplateImageProvider.cs" />
+    <Compile Include="MonoDevelop.Ide.Codons\ImageCodon.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\NewProjectConfiguration.cs" />
+    <Compile Include="MonoDevelop.Components\EventBoxTooltip.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\ProjectTemplateCreateInformation.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\SolutionTemplateVisibility.cs" />
+    <Compile Include="MonoDevelop.Ide.Templates\FileTemplateParser.cs" />
+    <Compile Include="MonoDevelop.Ide.Execution\TargetedExecutionHandler.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\IMainToolbarView.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\MainToolbarController.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\MainToolbarCommandHandlers.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\StatusBarContextHandler.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\IButtonBarButton.cs" />
+    <Compile Include="MonoDevelop.Components.MainToolbar\MainToolbarModels.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AppQuery.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AppResult.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\IAutoTestSessionDebug.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\AutoTestSessionDebug.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\SemanticModelAttribute.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\IndexOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\MarkedOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\ModelOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\NextSiblingsOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\Operation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\PropertyOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\TextOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\TypeOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Results\GtkTreeModelResult.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Results\GtkWidgetResult.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\ChildrenOperation.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Results\GtkNotebookResult.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects.OptionPanels\CodeAnalysisPanel.cs" />
+    <Compile Include="MonoDevelop.Ide.Projects\ProjectConfigurationControl.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Results\ObjectResult.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\PropertyMetadata.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest\ObjectProperties.cs" />
+    <Compile Include="MonoDevelop.Components.AutoTest.Operations\SelectedOperation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile.am" />
+    <Data Include="options\DefaultEditingLayout.xml" />
+    <Data Include="options\MonoDevelopProperties.xml" />
+    <Data Include="options\MonoDevelop-templates.xml" />
+    <Data Include="options\MonoDevelop-tools.xml" />
+    <Data Include="options\TipsOfTheDay.xml" />
+    <None Include="MonoDevelop.Ide.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(Data)" DestinationFolder="..\..\..\build\data\%(Data.RelativeDir)" />
+  </Target>
+  <ItemGroup>
+    <Folder Include="MonoDevelop.Components.MainToolbar\Theme\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gtkrc.win32">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="gtkrc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="gtkrc.win32-vista">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

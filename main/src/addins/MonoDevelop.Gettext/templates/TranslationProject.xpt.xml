@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Template originator = "Mike Krüger">
+
+	<!-- Template Header -->
+	<TemplateConfiguration>
+		<_Name>Translation Project</_Name>
+		<Category>other/misc/generic</Category>
+		<Icon>md-project|res:gettext-overlay-32.png</Icon>
+		<_Description>Creates a translation project.</_Description>
+		<DefaultFilename>TranslationProject</DefaultFilename>
+		<FileExtension>.mdproj</FileExtension>
+	</TemplateConfiguration>
+	
+	<!-- Template Content -->
+	<Combine name = "${ProjectName}" directory = ".">
+		<CombineEntry name = "${ProjectName}" 
+		              directory = "." 
+		              type = "MonoDevelop.Gettext.TranslationProject"
+		              packageName="i8n1" 
+		              outputType="RelativeToOutput" 
+		              relPath="locale" />
+	</Combine>
+	
+</Template>

@@ -1,0 +1,15 @@
+<ExtensionModel>
+
+	<!-- Extensions -->
+	
+	<Extension path = "/MonoDevelop/Ide/Commands">
+		<Command id = "MonoDevelop.RegexToolkit.Commands.ShowRegexToolkit"
+		         defaultHandler = "MonoDevelop.RegexToolkit.ShowRegexToolkitHandler"
+		         _label = "_Regex Toolkit..." />
+	</Extension>
+
+	<Extension path = "/MonoDevelop/Ide/MainMenu/Tools">
+		<CommandItem id = "MonoDevelop.RegexToolkit.Commands.ShowRegexToolkit" insertbefore="OptionsSection" />
+	</Extension>
+
+</ExtensionModel>
