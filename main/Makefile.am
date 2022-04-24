@@ -1,6 +1,6 @@
 include $(top_srcdir)/xbuild.include
 
-SUBDIRS = external . contrib src po man theme-icons build tests
+SUBDIRS = external . contrib src po man theme-icons build
 
 MD_CONFIGURE=$(top_srcdir)/../scripts/configure.sh
 

@@ -1,7 +1,6 @@
 
 
 SUBDIRS = \
-	MacPlatform \
 	GnomePlatform \
 	MonoDevelop.DesignerSupport \
 	MonoDevelop.Debugger \
@@ -14,12 +13,10 @@ SUBDIRS = \
 	MonoDevelop.Gettext \
 	Xml \
 	TextTemplating \
-	AspNet \
 	CSharpBinding \
 	ILAsmBinding \
 	NUnit \
 	MonoDeveloperExtensions \
-	VBNetBinding \
 	MonoDevelop.GtkCore \
 	ChangeLogAddIn \
 	MonoDevelop.WebReferences \
