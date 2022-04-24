@@ -2765,7 +2765,11 @@ namespace MonoDevelop.Ide.TypeSystem
 
 		static bool WaitForParseJob (int timeout = 5000)
 		{
-			return parseEvent.WaitOne (timeout, true);
+			try {
+				return parseEvent.WaitOne (timeout, true);
+			} catch {
+				return false;
+			}
 		}
 
 		static ParsingJob DequeueParseJob ()
@@ -2819,9 +2823,14 @@ namespace MonoDevelop.Ide.TypeSystem
 					if (trackingFileChanges)
 						ConsumeParsingQueue ();
 				}
-			} catch (Exception ex) {
+			}
+			catch (ThreadAbortException)
+			{
+			}
+			catch (Exception ex) {
 				LoggingService.LogError ("Unhandled error in parsing thread", ex);
 			}
+
 			lock (parseQueueLock) {
 				threadRunning = false;
 				if (trackingFileChanges)
